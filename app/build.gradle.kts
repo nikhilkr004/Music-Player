@@ -65,4 +65,7 @@ dependencies {
 
     ///blur view
     implementation("com.avito.android:blur-layout:1.1.1")
+
+    //seekbar
+    implementation ("com.seosh817:circularseekbar:1.0.2")
 }

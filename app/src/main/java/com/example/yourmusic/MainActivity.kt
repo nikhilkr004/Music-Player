@@ -26,12 +26,17 @@ class MainActivity : AppCompatActivity() {
     }
     private var exoPlayer: ExoPlayer? = null
     private lateinit var databaseReference: DatabaseReference
-    private val songs = mutableListOf<SongModel>()
-    private val hindi = mutableListOf<SongModel>()
+    companion object{
+         lateinit var songs :ArrayList<SongModel>
+         lateinit var hindi :ArrayList<SongModel>
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        songs= ArrayList()
+        hindi=ArrayList()
 
         binding.english.setOnClickListener {
             val intent = Intent(this, EnglishActivity::class.java)
@@ -48,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = binding.recyclerview
         recyclerView.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        val adapter = PopularSongAdapter(songs)
+        val adapter = PopularSongAdapter(songs,"english",this)
         recyclerView.adapter = adapter
         val musicRef = databaseReference.child("images")
         musicRef.addValueEventListener(object : ValueEventListener {
@@ -75,20 +80,16 @@ class MainActivity : AppCompatActivity() {
 
         val recycler = binding.df
         recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        val hindiAdapter = PopularSongAdapter(hindi)
+        val hindiAdapter = PopularSongAdapter(hindi,"hindi",this)
         recycler.adapter = hindiAdapter
         val hindiRef = databaseReference.child("hindi")
         hindiRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 hindi.clear()
-
                 for (Snapshot in p0.children) {
                     val data = Snapshot.getValue(SongModel::class.java)
                     if (data != null) {
                         hindi.add(data)
-
-
-
                         hindi.reverse()
 
                     }

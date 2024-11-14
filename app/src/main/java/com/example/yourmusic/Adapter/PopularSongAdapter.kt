@@ -1,29 +1,27 @@
 package com.example.yourmusic.Adapter
 
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.yourmusic.Activitys.PlayerActivity
 import com.example.yourmusic.Model.SongModel
-import com.example.yourmusic.MyExoPlayer
 import com.example.yourmusic.databinding.MusicItemBinding
-import com.example.yourmusic.databinding.SongItemBinding
 
 
-class PopularSongAdapter(val songs:List<SongModel>): RecyclerView.Adapter<PopularSongAdapter.ViewHolder>() {
+
+class PopularSongAdapter(val songs:List<SongModel>,val tage:String,val context: Context): RecyclerView.Adapter<PopularSongAdapter.ViewHolder>() {
     class ViewHolder(val binding: MusicItemBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(song: SongModel) {
+        fun bind(song: SongModel, tage: String) {
             val context=binding.root.context
             binding.songname.text=song.title.toString()
 
             Glide.with(context).load(song.image).into(binding.songCover)
 
-            binding.root.setOnClickListener {
-                MyExoPlayer.staryPlaying(context,song)
-                it.context.startActivity(Intent(it.context, PlayerActivity::class.java))
-            }
+
         }
 
 
@@ -41,6 +39,14 @@ class PopularSongAdapter(val songs:List<SongModel>): RecyclerView.Adapter<Popula
 
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
         val song=songs[p1]
-        p0.bind(song)
+        p0.bind(song,tage)
+
+        p0.binding.root.setOnClickListener {
+            val intent=Intent(context,PlayerActivity::class.java)
+            intent.putExtra("index",p1)
+            intent.putExtra("class",tage)
+            ContextCompat.startActivity(context,intent,null)
+
+        }
     }
 }
