@@ -108,29 +108,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        showPlayerView()
+
     }
 
 
-    fun showPlayerView() {
-        MyExoPlayer.getCurrentSong()?.let {
-            binding.customPlayer.setOnClickListener {
-                val intent = Intent(this, PlayerActivity::class.java)
-                startActivity(intent)
-            }
-            binding.customPlayer.visibility = View.VISIBLE
-            binding.songTitle.text = it.title.toString()
-            binding.textView8.text = it.singer.toString()
-            Glide.with(this).load(it.image).circleCrop().into(binding.songCoverImage)
-        } ?: run {
-            binding.customPlayer.visibility = View.GONE
-        }
 
-        MyExoPlayer.getInstance()?.let { player: ExoPlayer ->
-            exoPlayer = player
-            AllFunction()
-        }
-    }
 
     fun AllFunction() {
         binding.imageView5.setOnClickListener {

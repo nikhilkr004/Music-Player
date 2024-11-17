@@ -1,9 +1,14 @@
 package com.example.yourmusic.Activitys
 
 import android.annotation.SuppressLint
+import android.content.ComponentName
+import android.content.Intent
+import android.content.ServiceConnection
 import android.media.MediaPlayer
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.os.IBinder
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -11,13 +16,14 @@ import com.bumptech.glide.util.Util
 import com.example.yourmusic.MainActivity
 import com.example.yourmusic.Model.SongModel
 import com.example.yourmusic.R
+import com.example.yourmusic.Services.MusicService
 import com.example.yourmusic.Utils
 import com.example.yourmusic.databinding.ActivityPlayerBinding
 import com.google.firebase.database.core.utilities.Utilities
 import kotlinx.coroutines.Runnable
 
 
-class PlayerActivity : AppCompatActivity(){
+class PlayerActivity : AppCompatActivity(),ServiceConnection{
     private val binding by lazy {
         ActivityPlayerBinding.inflate(layoutInflater)
     }
@@ -26,15 +32,23 @@ class PlayerActivity : AppCompatActivity(){
         var REQUEST_CODE = 1
         lateinit var musicListPA: ArrayList<SongModel>
         var songPosition: Int = -1
-        var mediaPlayer: MediaPlayer? = null
         var isPlay: Boolean = false
+        var musicService:MusicService?=null
     }
 
-    private lateinit var runnable: Runnable
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        //background services
+        val intent=Intent(this,MusicService::class.java)
+        bindService(intent,this, BIND_AUTO_CREATE)
+        startService(intent)
+
+
+        /////////////////////////////////////
 
         initalizedLayout()
         //play pause btn
@@ -63,11 +77,11 @@ class PlayerActivity : AppCompatActivity(){
         // in this function create media
 
         try {
-            if (mediaPlayer == null) mediaPlayer = MediaPlayer()
-            mediaPlayer!!.reset()
-            mediaPlayer!!.setDataSource(musicListPA[songPosition].url)
-            mediaPlayer!!.prepare()
-            mediaPlayer!!.start()
+            if (musicService!!.mediaPlayer == null) musicService!!.mediaPlayer = MediaPlayer()
+            musicService!!.mediaPlayer!!.reset()
+            musicService!!.mediaPlayer!!.setDataSource(musicListPA[songPosition].url)
+            musicService!!.mediaPlayer!!.prepare()
+            musicService!!.mediaPlayer!!.start()
 
             initializeSeekbar()
 
@@ -77,7 +91,7 @@ class PlayerActivity : AppCompatActivity(){
                     progress: Int,
                     fromUser: Boolean
                 ) {
-                    if (fromUser) mediaPlayer!!.seekTo(progress)
+                    if (fromUser)  musicService!!.mediaPlayer!!.seekTo(progress)
                 }
 
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -108,21 +122,21 @@ class PlayerActivity : AppCompatActivity(){
                 musicListPA = ArrayList()
                 musicListPA!!.addAll(MainActivity.hindi)
                 setLayout()
-                createMediaPlayer()
+
             }
 
             "english" -> {
                 musicListPA = ArrayList()
                 musicListPA!!.addAll(MainActivity.songs)
                 setLayout()
-                createMediaPlayer()
+
             }
 
             "PopularAdapter" -> {
                 musicListPA = ArrayList()
                 musicListPA!!.addAll(MainActivity.hindi)
                 setLayout()
-                createMediaPlayer()
+
             }
         }
 
@@ -131,13 +145,13 @@ class PlayerActivity : AppCompatActivity(){
     private fun playMusic() {
         binding.pausePlay.setImageResource(R.drawable.pause)
         isPlay = true
-        mediaPlayer!!.start()
+        musicService!!.mediaPlayer!!.start()
     }
 
     private fun pauseMusic() {
         binding.pausePlay.setImageResource(R.drawable.play)
         isPlay = false
-        mediaPlayer!!.pause()
+        musicService!!.mediaPlayer!!.pause()
     }
 
     private fun prevNextSong(increment: Boolean) {
@@ -166,18 +180,18 @@ class PlayerActivity : AppCompatActivity(){
     }
 
     private fun initializeSeekbar() {
-        binding.seekBar.max = mediaPlayer!!.duration
+        binding.seekBar.max =  musicService!!.mediaPlayer!!.duration
 
         val handler = Handler()
         handler.postDelayed(object : Runnable {
             @SuppressLint("SuspiciousIndentation")
             override fun run() {
                 try {
-                    binding.seekBar.progress = mediaPlayer!!.currentPosition
+                    binding.seekBar.progress =  musicService!!.mediaPlayer!!.currentPosition
                     handler.postDelayed(this, 1000)
-                    val time = mediaPlayer!!.currentPosition
+                    val time =  musicService!!.mediaPlayer!!.currentPosition
                     updateUI(time)
-                    val totalDuratin = mediaPlayer!!.duration
+                    val totalDuratin =  musicService!!.mediaPlayer!!.duration
 
                     val formatDuration = formatDuration(totalDuratin)
                     binding.endTime.text = formatDuration.toString()
@@ -204,4 +218,21 @@ class PlayerActivity : AppCompatActivity(){
         val seconds = (milliseconds / 1000) % 60
         return String.format("%02d:%02d", minutes, seconds)
     }
+
+    override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+        /// it means background service is called then what we want to do
+
+        val binder=service as MusicService.MyBinder
+        musicService=binder.currentService()
+        createMediaPlayer()
+        musicService!!.showNotificatin()
+    }
+
+    override fun onServiceDisconnected(name: ComponentName?) {
+        ///when service id disconnect then what we want to do
+        musicService=null
+    }
 }
+
+
+

@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.yourmusic.Activitys.PlayerActivity
 import com.example.yourmusic.Model.SongModel
-import com.example.yourmusic.MyExoPlayer
 import com.example.yourmusic.databinding.SongItemBinding
 
 class SongsAdapter(val songs:List<SongModel>):RecyclerView.Adapter<SongsAdapter.ViewHolder>() {

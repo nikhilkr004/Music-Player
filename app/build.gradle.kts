@@ -68,4 +68,7 @@ dependencies {
 
     //seekbar
     implementation ("com.seosh817:circularseekbar:1.0.2")
+
+    //notification
+    implementation("androidx.media:media:1.7.0")
 }
