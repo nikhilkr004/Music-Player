@@ -9,7 +9,7 @@ data class SongModel(
     val url:String?="null",
     val image:String?="null",
     var uid:String?="null",
-    val like:Int?=0
+    val like:Long?=0
 ):Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
@@ -17,7 +17,7 @@ data class SongModel(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readValue(Int::class.java.classLoader) as? Int
+        parcel.readValue(Long::class.java.classLoader) as? Long
     ) {
     }
 

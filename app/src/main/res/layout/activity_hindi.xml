@@ -3,29 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#041260"
+    android:background="#7393B3"
     android:layout_height="match_parent"
     tools:context=".Activitys.HindiActivity">
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="245dp"
-        android:layout_height="172dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="299dp"
+        android:layout_height="246dp"
+        android:layout_marginTop="24dp"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
         app:srcCompat="@drawable/hindi" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hindi"
+        android:layout_marginTop="8dp"
+        android:text="Hindi Songs"
         android:textColor="@color/white"
         android:textSize="22sp"
         android:textStyle="bold"
+        android:fontFamily="@font/lemon"
         app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
@@ -40,4 +45,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="42dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/backrrow" />
 </androidx.constraintlayout.widget.ConstraintLayout>

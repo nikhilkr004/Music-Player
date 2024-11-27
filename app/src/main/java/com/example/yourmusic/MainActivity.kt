@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.yourmusic.Activitys.EnglishActivity
 import com.example.yourmusic.Activitys.HindiActivity
+import com.example.yourmusic.Activitys.LikedSongActivity
 import com.example.yourmusic.Activitys.PlayerActivity
 import com.example.yourmusic.Adapter.PopularSongAdapter
 import com.example.yourmusic.Adapter.SongsAdapter
@@ -44,6 +45,10 @@ class MainActivity : AppCompatActivity() {
         }
         binding.hindi.setOnClickListener {
             val intent = Intent(this, HindiActivity::class.java)
+            startActivity(intent)
+        }
+        binding.imageView8.setOnClickListener {
+            val intent = Intent(this, LikedSongActivity::class.java)
             startActivity(intent)
         }
 
@@ -111,23 +116,4 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
-
-
-    fun AllFunction() {
-        binding.imageView5.setOnClickListener {
-            if (exoPlayer!!.isPlaying) pauseAudio()
-            else playAudio()
-        }
-    }
-
-    fun playAudio() {
-        exoPlayer?.play()
-        binding.imageView5.setImageResource(R.drawable.pause)
-    }
-
-    fun pauseAudio() {
-        exoPlayer?.pause()
-        binding.imageView5.setImageResource(R.drawable.play)
-    }
 }

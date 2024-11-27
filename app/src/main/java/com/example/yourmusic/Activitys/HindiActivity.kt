@@ -28,7 +28,7 @@ class HindiActivity : AppCompatActivity() {
 
         val recyclerView=binding.englishRecycler
         recyclerView.layoutManager= LinearLayoutManager(this)
-        val adapter= SongsAdapter(songs)
+        val adapter= SongsAdapter(songs,"hindi",this)
         recyclerView.adapter=adapter
         val  musicRef=databaseReference.child("hindi")
         musicRef.addValueEventListener(object : ValueEventListener {

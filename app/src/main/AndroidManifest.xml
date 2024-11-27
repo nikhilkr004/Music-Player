@@ -4,13 +4,12 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <!-- Notification-->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <!-- Notification Permission for Android 14 -->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- Notification -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- Notification Permission for Android 14 -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+
     <application
-       android:name=".PlayOnNotification.ApplicationClass"
+        android:name=".PlayOnNotification.ApplicationClass"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -20,6 +19,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YourMusic"
         tools:targetApi="31">
+        <activity
+            android:name=".Activitys.LikedSongActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activitys.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activitys.SignInActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Activitys.HindiActivity"
             android:exported="false" />
@@ -31,20 +45,16 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <!-- Updated Permission for Android 14   -->
+            android:exported="false"></activity> <!-- Updated Permission for Android 14 -->
         <service
             android:name=".Services.MusicService"
-            android:foregroundServiceType="mediaPlayback"
             android:exported="false"
-            />
+            android:foregroundServiceType="mediaPlayback" />
+
+        <receiver
+            android:name=".Services.NotificationReciver"
+            android:enabled="true" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

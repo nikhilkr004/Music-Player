@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activitys.SignUpActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/lemon"
+        android:text="Your Music"
+        android:textSize="@dimen/_28sdp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/_30sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_18sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:background="@drawable/edit_text_back"
+            android:drawablePadding="@dimen/_10sdp"
+            android:hint="Name"
+            android:inputType="text"
+            android:padding="@dimen/_14sdp"
+            android:paddingStart="@dimen/_10sdp" />
+
+        <EditText
+            android:id="@+id/userName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_18sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:background="@drawable/edit_text_back"
+
+            android:drawablePadding="@dimen/_10sdp"
+            android:hint="UserName"
+            android:inputType="text"
+            android:padding="@dimen/_14sdp"
+            android:paddingStart="@dimen/_10sdp" />
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_18sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:background="@drawable/edit_text_back"
+
+            android:drawablePadding="@dimen/_10sdp"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:padding="@dimen/_14sdp"
+            android:paddingStart="@dimen/_10sdp" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_18sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:background="@drawable/edit_text_back"
+
+            android:drawablePadding="@dimen/_10sdp"
+            android:hint="Pssword"
+            android:inputType="textVisiblePassword"
+            android:padding="@dimen/_14sdp"
+            android:paddingStart="@dimen/_10sdp" />
+
+        <TextView
+            android:id="@+id/signUpBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_23sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:background="@drawable/main_background"
+            android:fontFamily="@font/lemon"
+            android:padding="@dimen/_10sdp"
+            android:text="Sign Up"
+            android:textAlignment="center"
+            android:textSize="@dimen/_18sdp" />
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/_6sdp"
+          android:gravity="center"
+          android:orientation="horizontal"
+          >
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="if you already have an account?  "
+              android:textAlignment="center"/>
+          <TextView
+              android:layout_width="wrap_content"
+              android:id="@+id/login_txt"
+              android:layout_height="wrap_content"
+              android:text="Login"
+              android:fontFamily="@font/lemon"
+              android:textAlignment="center"/>
+      </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Sign Up ..."
+        android:fontFamily="@font/lemon"
+        android:textSize="@dimen/_25sdp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

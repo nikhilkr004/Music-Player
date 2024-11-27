@@ -29,7 +29,7 @@ class EnglishActivity : AppCompatActivity() {
 
         val recyclerView=binding.englishRecycler
         recyclerView.layoutManager=LinearLayoutManager(this)
-        val adapter=SongsAdapter(songs)
+        val adapter=SongsAdapter(songs,"english",this)
         recyclerView.adapter=adapter
         val  musicRef=databaseReference.child("images")
         musicRef.addValueEventListener(object : ValueEventListener {
