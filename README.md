@@ -10,3 +10,7 @@ Key Features:
 📂 Categories: Organize your music library by genres, artists, or playlists.
 🌐 Cloud Integration: Store and retrieve your music via Firebase Database.
 📲 User-Friendly Interface: Navigate your library effortlessly with a clean, modern design.
+
+![image alt](https://github.com/nikhilkr004/Music-Player/blob/master/image1.jpeg.jpg)
+![image alt](https://github.com/nikhilkr004/Music-Player/blob/master/image3.jpeg.jpg)
+![image alt](https://github.com/nikhilkr004/Music-Player/blob/master/image2.jpeg.jpg)
