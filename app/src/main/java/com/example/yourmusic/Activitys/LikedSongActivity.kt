@@ -37,9 +37,7 @@ class LikedSongActivity : AppCompatActivity() {
             insets
         }
 
-        /// to finish and end the activity
-
-        binding
+        /// to finish the activity and back from activity
 
         likedSong= ArrayList()
         databaseReference=FirebaseDatabase.getInstance().reference
